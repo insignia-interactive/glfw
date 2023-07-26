@@ -1,7 +1,7 @@
 project "GLFW"
 	kind "StaticLib"
 	language "C"
-	staticruntime "off"
+	staticruntime "on"
 	warnings "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -99,7 +99,7 @@ project "GLFW"
 		}
 
 	filter "configurations:Debug"
-		runtime "Debug"
+		runtime "Release"
 		symbols "on"
 
 	filter "configurations:Release"
