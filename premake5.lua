@@ -1,7 +1,7 @@
 project "GLFW"
 	kind "StaticLib"
-	language "C"
 	staticruntime "on"
+	language "C"
 	warnings "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -99,13 +99,20 @@ project "GLFW"
 		}
 
 	filter "configurations:Debug"
-		runtime "Release"
+		runtime "Debug"
 		symbols "on"
+
+	filter { "system:windows", "configurations:Debug-AS" }	
+		runtime "Debug"
+		symbols "on"
+		sanitize { "Address" }
+		flags { "NoRuntimeChecks", "NoIncrementalLink" }
 
 	filter "configurations:Release"
 		runtime "Release"
 		optimize "speed"
 
-	filter "configurations:Dist"
+    filter "configurations:Dist"
 		runtime "Release"
-		optimize "on"
+		optimize "speed"
+        symbols "off"
